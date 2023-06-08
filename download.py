@@ -3,11 +3,16 @@
 
 # In this example: A Huggingface BERT model
 
-from transformers import pipeline
+import yolov5
 
 def download_model():
-    # do a dry run of loading the huggingface model, which will download weights
-    pipeline('fill-mask', model='bert-base-uncased')
+    model = yolov5.load('fcakyon/yolov5s-v7.0')
+
+    model.conf = 0.25  # NMS confidence threshold
+    model.iou = 0.45  # NMS IoU threshold
+    model.agnostic = False  # NMS class-agnostic
+    model.multi_label = False  # NMS multiple labels per box
+    model.max_det = 1000  # maximum number of detections per image
 
 if __name__ == "__main__":
     download_model()
