@@ -1,8 +1,7 @@
 accelerate
 websockets==10.0
 potassium
-torch
-PIL
+pillow
 yolov5
 numpy
 base64
