@@ -30,7 +30,7 @@ def inference(model_inputs:dict) -> dict:
     global model
 
    # get the base64 encoded string
-    im_b64 = model_inputs.json['image']
+    im_b64 = model_inputs['image']
 
     # convert it into bytes  
     img_bytes = base64.b64decode(im_b64.encode('utf-8'))
