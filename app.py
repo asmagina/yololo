@@ -4,6 +4,7 @@ from PIL import Image
 import base64
 import io
 import numpy as np
+from transformers import pipeline
 
 # Init is ran on server startup
 # Load your model to GPU as a global variable here using the variable name "model"
@@ -12,6 +13,7 @@ def init():
     
     device = 0 if torch.cuda.is_available() else -1
     model = yolov5.load('fcakyon/yolov5s-v7.0')
+    model = pipeline("object-detection", model=model, device=device)
 
     model.conf = 0.25  # NMS confidence threshold
     model.iou = 0.45  # NMS IoU threshold
