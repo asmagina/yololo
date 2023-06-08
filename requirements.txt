@@ -6,3 +6,4 @@ yolov5
 numpy
 pybase64
 pyio
+sanic
