@@ -6,6 +6,7 @@ WORKDIR /
 # Install git
 RUN apt-get update && apt-get install -y git
 RUN apt-get install -y libgl1-mesa-glx
+RUN apt-get install -y libglib2.0-0
 
 
 # Install python packages
