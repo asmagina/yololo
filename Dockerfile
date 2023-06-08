@@ -5,6 +5,8 @@ WORKDIR /
 
 # Install git
 RUN apt-get update && apt-get install -y git
+RUN apt-get install libgl1-mesa-glx
+
 
 # Install python packages
 RUN pip3 install --upgrade pip
