@@ -12,12 +12,11 @@ from transformers import AutoImageProcessor, AutoModelForObjectDetection
 # Load your model to GPU as a global variable here using the variable name "model"
 def init():
     global model
-    global image_processor
     
     device = 0 if torch.cuda.is_available() else -1
+    image_processor = AutoImageProcessor.from_pretrained("hustvl/yolos-tiny")
     model = AutoModelForObjectDetection.from_pretrained("hustvl/yolos-tiny")
     model = pipeline("object-detection", model=model, image_processor=image_processor, device=device)
-    image_processor = AutoImageProcessor.from_pretrained("hustvl/yolos-tiny")
 
     model.conf = 0.25  # NMS confidence threshold
     model.iou = 0.45  # NMS IoU threshold
@@ -29,7 +28,6 @@ def init():
 # Reference your preloaded global model variable here.
 def inference(model_inputs:dict) -> dict:
     global model
-    global image_processor
 
    # get the base64 encoded string
     im_b64 = model_inputs.json['image']
