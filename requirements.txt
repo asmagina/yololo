@@ -4,5 +4,5 @@ potassium
 pillow
 yolov5
 numpy
-base64
-io
+pybase64
+pyio
