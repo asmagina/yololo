@@ -1,4 +1,9 @@
-sanic==22.6.2
-transformers
 accelerate
 websockets==10.0
+potassium
+torch
+PIL
+yolov5
+numpy
+base64
+io
