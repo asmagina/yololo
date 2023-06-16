@@ -4,6 +4,7 @@ from PIL import Image
 import base64
 import io
 import numpy as np
+import transformers
 from transformers import pipeline
 from transformers import AutoImageProcessor, AutoModelForObjectDetection
 from potassium import Potassium, Request, Response
@@ -17,9 +18,10 @@ app = Potassium("my_app")
 @app.init
 def init():   
     device = 0 if torch.cuda.is_available() else -1
+    transformers.utils.move_cache()
 
     # load model
-    model = yolov5.load('fcakyon/yolov5s-v7.0', device='0')
+    model = yolov5.load('fcakyon/yolov5s-v7.0', device='cpu')
 
     # set model parameters
     model.conf = 0.25  # NMS confidence threshold
