@@ -4,7 +4,7 @@
 # In this example: A Huggingface BERT model
 
 
-from transformers import yolov5
+import yolov5
 
 def download_model():
     model = yolov5.load('fcakyon/yolov5s-v7.0', device='0')
