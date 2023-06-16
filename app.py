@@ -14,15 +14,26 @@ def init():
     global model
     
     device = 0 if torch.cuda.is_available() else -1
-    image_processor = AutoImageProcessor.from_pretrained("hustvl/yolos-tiny")
-    model = AutoModelForObjectDetection.from_pretrained("hustvl/yolos-tiny")
-    model = pipeline("object-detection", model=model, image_processor=image_processor, device=device)
 
+    # load model
+    model = yolov5.load('fcakyon/yolov5s-v7.0', device='cuda')
+
+    # set model parameters
     model.conf = 0.25  # NMS confidence threshold
     model.iou = 0.45  # NMS IoU threshold
     model.agnostic = False  # NMS class-agnostic
     model.multi_label = False  # NMS multiple labels per box
     model.max_det = 1000  # maximum number of detections per image
+
+    # # image_processor = AutoImageProcessor.from_pretrained("hustvl/yolos-tiny")
+    # model = AutoModelForObjectDetection.from_pretrained("hustvl/yolos-tiny")
+    # model = pipeline("object-detection", model=model, device=device)
+
+    # model.conf = 0.25  # NMS confidence threshold
+    # model.iou = 0.45  # NMS IoU threshold
+    # model.agnostic = False  # NMS class-agnostic
+    # model.multi_label = False  # NMS multiple labels per box
+    # model.max_det = 1000  # maximum number of detections per image
 
 # Inference is ran for every server call
 # Reference your preloaded global model variable here.
