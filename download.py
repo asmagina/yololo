@@ -7,7 +7,7 @@
 import yolov5
 
 def download_model():
-    model = yolov5.load('fcakyon/yolov5s-v7.0', device='0')
+    yolov5.load('fcakyon/yolov5s-v7.0', device='0')
 
 
 if __name__ == "__main__":
