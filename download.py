@@ -4,15 +4,10 @@
 # In this example: A Huggingface BERT model
 
 
-from transformers import pipeline
-from transformers import AutoImageProcessor, AutoModelForObjectDetection
-import torch
+from transformers import yolov5
 
 def download_model():
-    device = 0 if torch.cuda.is_available() else -1
-    image_processor = AutoImageProcessor.from_pretrained("hustvl/yolos-tiny")
-    model = AutoModelForObjectDetection.from_pretrained("hustvl/yolos-tiny")
-    model = pipeline("object-detection", model=model, image_processor=image_processor, device=device)
+    model = yolov5.load('fcakyon/yolov5s-v7.0', device='0')
 
 
 if __name__ == "__main__":

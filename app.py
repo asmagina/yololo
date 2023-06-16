@@ -6,13 +6,16 @@ import io
 import numpy as np
 from transformers import pipeline
 from transformers import AutoImageProcessor, AutoModelForObjectDetection
+from potassium import Potassium, Request, Response
 
 
 # Init is ran on server startup
 # Load your model to GPU as a global variable here using the variable name "model"
-def init():
-    global model
-    
+
+app = Potassium("my_app")
+
+@app.init
+def init():   
     device = 0 if torch.cuda.is_available() else -1
 
     # load model
@@ -34,14 +37,18 @@ def init():
     # model.agnostic = False  # NMS class-agnostic
     # model.multi_label = False  # NMS multiple labels per box
     # model.max_det = 1000  # maximum number of detections per image
+    context = {
+        "model": model
+    }
 
-# Inference is ran for every server call
-# Reference your preloaded global model variable here.
-def inference(model_inputs:dict) -> dict:
-    global model
+    return context    
+
+@app.handler()
+def handler(context: dict, request: Request) -> Response:
+    model = context.get("model")
 
    # get the base64 encoded string
-    im_b64 = model_inputs['image']
+    im_b64 = request.json.get('image')
 
     # convert it into bytes  
     img_bytes = base64.b64decode(im_b64.encode('utf-8'))
