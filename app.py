@@ -21,7 +21,7 @@ def init():
     transformers.utils.move_cache()
 
     # load model
-    model = yolov5.load('fcakyon/yolov5s-v7.0', device='cpu')
+    model = yolov5.load('yolov5s.pt', device='cpu')
 
     # set model parameters
     model.conf = 0.25  # NMS confidence threshold
