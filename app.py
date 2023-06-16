@@ -16,7 +16,7 @@ def init():
     device = 0 if torch.cuda.is_available() else -1
 
     # load model
-    model = yolov5.load('fcakyon/yolov5s-v7.0', device='cuda')
+    model = yolov5.load('fcakyon/yolov5s-v7.0', device='0')
 
     # set model parameters
     model.conf = 0.25  # NMS confidence threshold
